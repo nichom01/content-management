@@ -1,0 +1,199 @@
+# Cursor Rules for Neversoft CMS
+
+This file provides context about the tech stack and project structure for AI-assisted development.
+
+## Project Overview
+
+This is a **Hugo static site generator** project that serves as a content management system and documentation site. The site is named "Neversoft" and hosts documentation for a Supplier Management System.
+
+## Tech Stack
+
+### Core Framework
+- **Hugo** (v0.146.0+) - Static site generator written in Go
+  - Uses Hugo Extended for SCSS compilation
+  - Generates static HTML from Markdown content
+  - No runtime dependencies or build tools required
+  - Fast build times and optimized output
+
+### Theme
+- **Monochrome Theme** (`hugo-theme-monochrome`)
+  - Clean, minimal design (~5KB gzipped CSS)
+  - Responsive (mobile-first)
+  - Light/dark mode support
+  - Multiple layout options: list, balloon, bookcase, gallery, postcard
+  - Built-in features:
+    - Syntax highlighting (Prism.js)
+    - Site search (uFuzzy)
+    - Math notation (MathJax)
+    - SEO optimization
+    - Multilingual support
+
+### Content Format
+- **Markdown** (`.md` files) - Primary content format
+- **Front Matter** - TOML format (`+++`) for metadata
+- **TOML** - Configuration files (`hugo.toml`)
+
+### Styling
+- **SCSS** - Compiled by Hugo Extended
+- Theme uses minimal CSS approach
+- Custom styles can be added to `static/` directory
+
+### JavaScript Libraries (via theme)
+- Prism.js - Syntax highlighting
+- uFuzzy - Site search
+- MathJax - Mathematical notation
+- Zooming.js - Image zoom functionality
+
+## Project Structure
+
+```
+cms/
+├── content/              # Markdown content files
+│   ├── about.md
+│   ├── functional-specification.md
+│   └── system-description.md
+├── hugo.toml            # Main configuration
+├── themes/              # Hugo themes
+│   └── hugo-theme-monochrome/
+├── layouts/             # Custom layout overrides (optional)
+├── static/              # Static assets (images, CSS, JS)
+├── public/              # Generated site (output directory)
+└── resources/           # Hugo resource cache
+```
+
+## Key Files
+
+### Configuration
+- `hugo.toml` - Main site configuration
+  - Base URL, language, title, theme settings
+
+### Content
+- `content/*.md` - Markdown content files
+  - Front matter in TOML format (`+++`)
+  - Standard Markdown syntax for content
+
+### Theme Location
+- `themes/hugo-theme-monochrome/` - Theme files
+  - Do not modify theme files directly
+  - Override in `layouts/` if needed
+
+## Development Commands
+
+```bash
+# Development server (with live reload)
+hugo server
+
+# Development server (include drafts)
+hugo server -D
+
+# Build for production
+hugo
+
+# Build with drafts
+hugo -D
+
+# Clean build (remove old files)
+hugo --cleanDestinationDir
+```
+
+## Content Creation
+
+### New Page
+1. Create `.md` file in `content/` directory
+2. Add front matter:
+```toml
++++
+date = '2025-01-15T10:30:00Z'
+title = 'Page Title'
+draft = false
++++
+```
+3. Write Markdown content below front matter
+
+### Front Matter Fields
+- `date` - Publication date (ISO 8601 format)
+- `title` - Page title
+- `draft` - Boolean, exclude from build if true
+- `tags` - Array of tags
+- `categories` - Array of categories
+
+## Hugo Concepts
+
+### Sections
+- Subdirectories in `content/` create sections
+- Each section can have `_index.md` for section page
+
+### Taxonomies
+- Tags and categories are default taxonomies
+- Automatically generated from front matter
+
+### Shortcodes
+- Theme provides shortcodes: `{{< icon >}}`, `{{< color-block >}}`, etc.
+- Use in Markdown: `{{< shortcode-name param="value" >}}`
+
+### Partials
+- Reusable templates in `layouts/_partials/`
+- Can override theme partials
+
+## Best Practices
+
+### Content
+- Use descriptive filenames (kebab-case)
+- Keep front matter consistent
+- Use Markdown syntax properly
+- Organize content in logical sections
+
+### Customization
+- Override theme layouts in `layouts/` directory
+- Add custom CSS/JS to `static/` directory
+- Don't modify theme files directly (use submodule or copy)
+
+### Performance
+- Hugo generates optimized static HTML
+- Images should be optimized before adding
+- Use Hugo image processing for responsive images
+
+## Common Tasks
+
+### Adding a New Page
+1. Create `content/new-page.md`
+2. Add front matter with title and date
+3. Write content in Markdown
+4. Build: `hugo` or preview: `hugo server`
+
+### Customizing Styles
+1. Add CSS file to `static/css/custom.css`
+2. Reference in `hugo.toml` or theme config
+3. Or override theme SCSS variables
+
+### Adding Images
+1. Place images in `static/images/`
+2. Reference in Markdown: `![alt text](/images/image.jpg)`
+3. Or use Hugo image processing shortcodes
+
+### Modifying Navigation
+- Configure menus in `hugo.toml` or theme config
+- Theme supports nested menus
+
+## Theme Documentation
+
+- Demo: https://kaiiiz.github.io/hugo-theme-monochrome
+- Configuration: https://kaiiiz.github.io/hugo-theme-monochrome/configuration/
+- Shortcodes: https://kaiiiz.github.io/hugo-theme-monochrome/shortcodes/
+
+## Important Notes
+
+1. **Hugo Extended Required** - Regular Hugo won't compile SCSS
+2. **No Node.js/Build Tools** - Hugo handles everything
+3. **Static Output** - Generates pure HTML/CSS/JS
+4. **Fast Builds** - Typically < 1 second for small sites
+5. **Theme Updates** - If using Git submodule, pull updates separately
+
+## Related Projects
+
+This CMS documents the **Neversoft Supplier Management System**, which includes:
+- Frontend: React + TypeScript (supplier-ui)
+- Backend: FastAPI + Python (neversoft-api)
+
+See `content/functional-specification.md` for full system documentation.
+

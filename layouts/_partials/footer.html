@@ -1,0 +1,35 @@
+{{ $footerText := (.Store.Get "params").footer }}
+<footer>
+    <article>
+        {{/* Navigation Links */}}
+        {{ if .Site.Menus.footer }}
+        <nav style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 1rem;">
+            {{ range .Site.Menus.footer }}
+                <a href="{{ .URL }}" style="text-decoration: none; color: inherit; opacity: 0.8; transition: opacity 0.2s;">
+                    {{ .Name }}
+                </a>
+            {{ end }}
+        </nav>
+        {{ end }}
+        
+        {{/* Footer Content */}}
+        {{ if $footerText }}
+        <div>
+            {{- $footerText | safeHTML -}}
+        </div>
+        {{ else }}
+        <div>
+            <p style="margin: 0;">
+                Copyright © {{ now.Year }} {{ .Site.Title }}. All rights reserved.
+            </p>
+        </div>
+        {{ end }}
+        
+        {{/* Built with credit */}}
+        <div style="margin-top: 0.75rem; font-size: 0.875em; opacity: 0.6;">
+            Built with <a href="https://gohugo.io" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Hugo</a> 
+            and <a href="https://github.com/kaiiiz/hugo-theme-monochrome" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Monochrome</a> theme
+        </div>
+    </article>
+</footer>
+

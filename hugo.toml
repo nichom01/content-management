@@ -1,0 +1,23 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Neversoft'
+theme = "hugo-theme-monochrome"
+
+[params]
+footer = "Copyright © 2025 Neversoft. Documentation for the Supplier Management System."
+
+[[menu.footer]]
+name = "About"
+url = "/about"
+weight = 10
+
+[[menu.footer]]
+name = "Functional Specification"
+url = "/functional-specification"
+weight = 20
+
+[[menu.footer]]
+name = "System Description"
+url = "/system-description"
+weight = 30
+
