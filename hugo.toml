@@ -6,18 +6,35 @@ theme = "hugo-theme-monochrome"
 [params]
 footer = "Copyright © 2025 Neversoft. Documentation for the Supplier Management System."
 
+# Navbar Menu
+[[menu.navbar]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.navbar]]
+name = "Posts"
+url = "/posts/"
+weight = 20
+
+[[menu.navbar]]
+name = "About"
+url = "/posts/about/"
+weight = 30
+
+# Footer Menu
 [[menu.footer]]
 name = "About"
-url = "/about"
+url = "/posts/about/"
 weight = 10
 
 [[menu.footer]]
 name = "Functional Specification"
-url = "/functional-specification"
+url = "/posts/functional-specification/"
 weight = 20
 
 [[menu.footer]]
 name = "System Description"
-url = "/system-description"
+url = "/posts/system-description/"
 weight = 30
 

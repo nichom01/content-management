@@ -1,5 +1,8 @@
 {{ $footerText := (.Store.Get "params").footer }}
 <footer>
+    {{/* Footer Separator */}}
+    <div class="footer-separator"></div>
+    
     <article>
         {{/* Navigation Links */}}
         {{ if .Site.Menus.footer }}
@@ -32,4 +35,21 @@
         </div>
     </article>
 </footer>
+
+<style>
+/* Footer Separator */
+.footer-separator {
+    border-top: 1px solid var(--color-border);
+    margin: 0 auto;
+    max-width: 1200px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+/* Footer Styling */
+footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+</style>
 
