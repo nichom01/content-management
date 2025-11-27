@@ -1,0 +1,64 @@
+<nav id="header_navbar" class="pure-menu header-menu">
+    {{- $currentPage := . -}}
+    {{- $currentUrl := .RelPermalink | lower -}}
+    {{- $baseURL := .Site.BaseURL | relURL | lower }}
+    <ul class="pure-menu-list">
+        {{- range .Site.Menus.navbar -}}
+            {{ $navbar_decoration := "" }}
+            {{- $menuUrl := .URL | relURL | lower -}}
+            
+            {{- /* Check for exact menu match first */ -}}
+            {{- if $currentPage.IsMenuCurrent "navbar" . -}}
+                {{ $navbar_decoration = "active" }}
+            {{- /* Check for exact URL match */ -}}
+            {{- else if eq $currentUrl $menuUrl -}}
+                {{ $navbar_decoration = "active" }}
+            {{- /* Check if current URL is a child of this menu item (for sections) */ -}}
+            {{- else if and (hasPrefix $currentUrl $menuUrl) (ne $menuUrl $baseURL) (ne $currentUrl $menuUrl) -}}
+                {{- /* Check if there's a more specific menu item that matches this URL better */ -}}
+                {{- $hasMoreSpecificMatch := false -}}
+                {{- range $.Site.Menus.navbar -}}
+                    {{- $otherMenuUrl := .URL | relURL | lower -}}
+                    {{- if and (ne $otherMenuUrl $menuUrl) (hasPrefix $currentUrl $otherMenuUrl) -}}
+                        {{- /* If the other menu URL is longer (more specific), it's a better match */ -}}
+                        {{- if gt (len $otherMenuUrl) (len $menuUrl) -}}
+                            {{- $hasMoreSpecificMatch = true -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+                {{- if not $hasMoreSpecificMatch -}}
+                    {{ $navbar_decoration = "insection" }}
+                {{- end -}}
+            {{- end -}}
+
+            {{- $name := .Name }}
+            {{- with .Identifier }}
+              {{- with T . }}
+                {{- $name = . }}
+              {{- end }}
+            {{- end }}
+
+            {{- if .Children -}}
+                <li class="header-menu-item header-menu-dropdown pure-menu-item pure-menu-has-children pure-menu-allow-hover {{ $navbar_decoration }}">
+                    {{ if .URL }}
+                        <a href="{{ .URL }}" class="pure-menu-link">{{- $name -}}</a>
+                    {{ else }}
+                        <div class="pure-menu-link">{{- $name -}}</div>
+                    {{ end }}
+                    <ul class="pure-menu-children">
+                        {{- partial "navbar/nested-desktop.html" . -}}
+                    </ul>
+                </li>
+            {{- else -}}
+                <li class="header-menu-item pure-menu-item {{ $navbar_decoration }}">
+                    {{ if .URL }}
+                        <a href="{{ .URL }}" class="pure-menu-link">{{- $name -}}</a>
+                    {{ else }}
+                        <div class="pure-menu-link">{{- $name -}}</div>
+                    {{ end }}
+                </li>
+            {{- end -}}
+        {{- end -}}
+    </ul>
+</nav>
+
