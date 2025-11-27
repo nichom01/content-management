@@ -1,6 +1,6 @@
 +++
 date = '2025-11-26T23:30:13Z'
-title = 'Sales Pitch'
+title = 'Product Details'
 +++
 
 # Supplier Management System - Simple Explanation
