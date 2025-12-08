@@ -1,6 +1,6 @@
 +++
 date = '2025-11-26T23:21:13Z'
-title = 'About Me'
+title = 'About'
 +++
 
 this is my first page in hugo
