@@ -21,11 +21,16 @@ March - sub 40 10K and under 15% bf
 ## House
 
 - Nook
+- Wardrobe surround
+- Garden Clearance
+- Duke Box
 
 ## Programming
 
-Music Game
-Rules Engine
-Stateless Orchestration
-Full WMS
+- Music Game
+- Rules Engine
+- Stateless Orchestration
+- Full WMS
+- Some form of management information for one of the above
+- Duke Box
 
